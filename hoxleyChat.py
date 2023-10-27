@@ -21,7 +21,7 @@ def startSession(lsock):
 
 def getInput(conn):
     try:
-        return conn.recv(4096)
+        return conn.recv(30)
     except:
         pass
 
@@ -43,11 +43,18 @@ lsock = serverListener()        #Initialize Server
 while True:                     #basic connection acceptor loop                     
     newConn = startSession(lsock)
     if newConn:
-        connCollector.append(newConn)
+        connections.append(newConn)
 
     for i in connections:
-        messagePool.append(getInput(i[0]))
-        sendOutput(i[0], messagePool[-1])
+
+        try:
+            sendOutput(i[0], messagePool[-1])
+        except:
+            pass
+        try:
+            messagePool.append(getInput(i[0]))
+        except:
+            pass
 
         
 
