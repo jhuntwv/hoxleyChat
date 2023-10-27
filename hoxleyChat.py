@@ -16,18 +16,20 @@ def startSession(lsock):
         conn, source = lsock.accept()
         conn.setblocking(False)
         return conn, source
-    else:
+    except:
         return False 
 
 def getInput(conn):
     try:
         return conn.recv(4096)
-    else:
+    except:
         pass
 
-def sendOutput(conn, ):
+def sendOutput(conn,message ):
     try:
-        conn.sendall(
+        conn.sendall(message)
+    except:
+        pass
 
 
 
